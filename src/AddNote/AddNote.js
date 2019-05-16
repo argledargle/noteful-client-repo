@@ -5,6 +5,7 @@ import ValidationError from "./ValidationError";
 import config from '../config'
 import "./AddNote.css";
 
+
 class AddNote extends React.Component {
   constructor(props) {
     super(props);
@@ -15,7 +16,7 @@ class AddNote extends React.Component {
         name: ""
       }
     };
-    this.name = React.createRef();
+    this.note_name = React.createRef();
   }
 
   static contextType = NotefulContext;
@@ -23,12 +24,13 @@ class AddNote extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
     const note = {
-      note_name: e.target.name.value,
+      note_name: e.target.note_name.value,
       folder_id: e.target.folderId.value,
       content: e.target.content.value
     };
     this.updateName(note.note_name);
     if (this.state.nameValid) {
+      console.log(note)
       fetch(`${config.API_ENDPOINT}/notes`, {
         method: "POST",
         body: JSON.stringify(note),
@@ -108,17 +110,17 @@ class AddNote extends React.Component {
           </div>
 
           <div className="formInputs">
-            <label className="label" htmlFor="name">
+            <label className="label" htmlFor="note_name">
               Note Name:
             </label>
             <input
               type="text"
               name="note-name"
-              id="name"
+              id="note_name"
               placeholder="New Note"
               aria-required="true"
               aria-label="Enter a name for your new note"
-              ref={this.name}
+              ref={this.note_name}
             />
             <ValidationError
               hasError={!this.state.nameValid}

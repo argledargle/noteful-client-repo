@@ -52,7 +52,7 @@ class App extends Component {
   }
 
   fetchNotes() {
-    const notesUrl = 'http://localhost:8000/api/notes';
+    const notesUrl = `${config.API_ENDPOINT}/notes`;
     const notesOptions = {
       method: 'GET',
       headers: {
