@@ -8,3 +8,4 @@ const NotefulContext = React.createContext({
   addNote: () => {},
 });
 export default NotefulContext;
+ 
